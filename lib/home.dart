@@ -10,6 +10,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
+  bool tapped = false;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -105,7 +106,6 @@ class _HomeState extends State<Home> {
             ),
           ),
           Container(
-            width: 400,
             padding: const EdgeInsets.only(left: 40, top: 50),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -138,87 +138,110 @@ class _HomeState extends State<Home> {
                   child: Row(
                     children: [
                       SizedBox(width: 10),
-                      Chip(
-                        backgroundColor: Color(0xff5ec547),
+                      ActionChip(
                         label: Text(
                           'salads',
                           style: TextStyle(
                             fontSize: 15,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                       SizedBox(width: 10),
-                      Chip(
-                        backgroundColor: Color(0xff5ec547),
+                      ActionChip(
                         label: Text(
                           'salads',
                           style: TextStyle(
                             fontSize: 15,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                       SizedBox(width: 10),
-                      Chip(
-                        backgroundColor: Color(0xff5ec547),
+                      ActionChip(
                         label: Text(
                           'salads',
                           style: TextStyle(
                             fontSize: 15,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
-                      Chip(
-                        label: Text(
-                          'salads',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Chip(
-                        backgroundColor: Color(0xff5ec547),
-                        label: Text(
-                          'salads',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 10),
                     ],
                   ),
                 ),
-                Container(
-                  width: 174,
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 20,
-                  ),
-                  height: 270,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(
-                        24,
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 174,
+                        margin: const EdgeInsets.symmetric(
+                          vertical: 20,
+                        ),
+                        height: 270,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(
+                              24,
+                            ),
+                          ),
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.black12,
+                              Colors.white,
+                              Colors.black,
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.black12,
-                        Colors.white,
-                        Colors.black,
-                      ],
-                    ),
+                      Container(
+                        width: 174,
+                        margin: const EdgeInsets.symmetric(
+                          vertical: 20,
+                        ),
+                        height: 270,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(
+                              24,
+                            ),
+                          ),
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.black12,
+                              Colors.white,
+                              Colors.black,
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 174,
+                        margin: const EdgeInsets.symmetric(
+                          vertical: 20,
+                        ),
+                        height: 270,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(
+                              24,
+                            ),
+                          ),
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.black12,
+                              Colors.white,
+                              Colors.black,
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
