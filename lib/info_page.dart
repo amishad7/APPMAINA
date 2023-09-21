@@ -53,7 +53,7 @@ class _infoPageState extends State<infoPage> {
                         const SizedBox(height: 150),
                         Container(
                           height: 35,
-                          width: 110,
+                          width: 120,
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(14)),
                             boxShadow: [
@@ -65,6 +65,7 @@ class _infoPageState extends State<infoPage> {
                             color: Colors.green,
                           ),
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               IconButton(
                                 onPressed: () {
