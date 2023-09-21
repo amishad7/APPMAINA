@@ -1,9 +1,9 @@
 # appmania
-#**Beginner Level Project**
+**Beginner Level Project**
 >This project is based on the food delivery sector.
 > 
-> there are three main screen and :
-+Home screen
-+Detail screen
-+Cart Screen
+> *there are three main screen*:
+> - Home screen
+> - Detail screen
+> - Cart Screen
 > 
