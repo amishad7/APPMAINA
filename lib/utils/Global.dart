@@ -8,8 +8,10 @@ class Global {
           "title": "veg pizza",
           "price": 100,
           "cal": 120.96,
+          'qty': 1,
           "rating": 4.00,
           'fav': false,
+          'inCart': false,
           'CategoryName': 'Pizza',
           "description":
               "A hugely popular margherita, with a deliciously tangy single cheese topping",
@@ -19,6 +21,8 @@ class Global {
           "id": 2,
           "title": "cheese pizza",
           'fav': false,
+          'inCart': false,
+          'qty': 1,
           "price": 100,
           "cal": 120.96,
           "rating": 4.00,
@@ -32,8 +36,10 @@ class Global {
           "title": "magenta pizza",
           "price": 100,
           'fav': false,
+          'qty': 1,
           "cal": 120.96,
           "rating": 4.00,
+          'inCart': false,
           'CategoryName': 'Pizza',
           "description":
               "A hugely popular margherita, with a deliciously tangy single cheese topping",
@@ -47,10 +53,12 @@ class Global {
         {
           "id": 1,
           "title": "Orange juice",
+          'qty': 1,
           'fav': false,
           "price": 100,
           "cal": 120.96,
           "rating": 4.00,
+          'inCart': false,
           'CategoryName': 'Juice',
           "description":
               "Choose your favourite non-veg pizzas from the Domino's Pizza menu. Get fresh non-veg pizza with your choice of crusts & toppings",
@@ -61,21 +69,25 @@ class Global {
           "id": 2,
           "title": "Starberry juice",
           "price": 100,
+          'qty': 1,
           "cal": 120.96,
           'fav': false,
           "rating": 4.00,
           'CategoryName': 'Juice',
           "description":
               "Choose your favourite non-veg pizzas from the Domino's Pizza menu. Get fresh non-veg pizza with your choice of crusts & toppings",
+          'inCart': false,
           "thumbnail":
               "https://i.pinimg.com/1200x/31/22/8f/31228f9e80515199d4c38acac8e22d8b.jpg",
         },
         {
           "id": 3,
+          'qty': 1,
           "title": "cherry",
           "price": 100,
           "cal": 120.96,
           'fav': false,
+          'inCart': false,
           "rating": 4.00,
           'CategoryName': 'Juice',
           "description":
@@ -91,6 +103,8 @@ class Global {
         {
           "id": 1,
           "title": "veg salad",
+          'inCart': false,
+          'qty': 1,
           "price": 100,
           'fav': false,
           "cal": 120.96,
@@ -107,6 +121,8 @@ class Global {
           "price": 100,
           "cal": 120.96,
           'fav': false,
+          'qty': 1,
+          'inCart': false,
           "rating": 4.00,
           'CategoryName': 'Juice',
           "description":
@@ -119,7 +135,9 @@ class Global {
           "title": "salad",
           "price": 100,
           "cal": 120.96,
+          'qty': 1,
           'fav': false,
+          'inCart': false,
           "rating": 4.00,
           'CategoryName': 'Juice',
           "description":
@@ -131,7 +149,16 @@ class Global {
     },
   ];
   static num totalPrice = 0;
+  static num subTotal = 0;
   static TotalPrice() {
+    num sum = 0;
+    cartProducts.forEach((e) {
+      sum = sum + (e['price'] * e['qty']);
+    });
+    return sum;
+  }
+
+  static SubTotal() {
     num sum = 0;
     cartProducts.forEach((e) {
       sum = sum + e['price'];
@@ -139,7 +166,6 @@ class Global {
     return sum;
   }
 
-  static int qty = 1;
   static List likeProducts = [];
   static List cartProducts = [];
 }

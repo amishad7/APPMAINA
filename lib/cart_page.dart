@@ -21,13 +21,16 @@ class _cartPageState extends State<cartPage> {
         elevation: 0,
         actions: [
           IconButton(
-              onPressed: () {
-                setState(() {});
-              },
-              icon: Icon(CupertinoIcons.heart)),
+            onPressed: () {
+              setState(() {
+                Navigator.of(context).pushNamed('four');
+              });
+            },
+            icon: const Icon(CupertinoIcons.heart),
+          ),
         ],
-        backgroundColor: Colors.greenAccent,
-        title: Text(
+        backgroundColor: Color(0xff6cd551),
+        title: const Text(
           'Cart ',
           style: TextStyle(
             color: Colors.white,
@@ -36,14 +39,15 @@ class _cartPageState extends State<cartPage> {
           ),
         ),
       ),
+      backgroundColor: Colors.white,
       body: Container(
-        color: Colors.greenAccent,
+        color: Color(0xff6cd551),
         child: Column(
           children: [
             Expanded(
               flex: 1,
               child: Container(
-                color: Colors.greenAccent,
+                color: Color(0xff6cd551),
               ),
             ),
             Expanded(
@@ -51,7 +55,8 @@ class _cartPageState extends State<cartPage> {
               child: Container(
                 height: double.infinity,
                 width: double.infinity,
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.only(top: 20),
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(30),
@@ -73,69 +78,155 @@ class _cartPageState extends State<cartPage> {
                               },
                             );
                           },
-                          child: Card(
-                            child: Container(
-                              margin: EdgeInsets.only(top: 10),
-                              height: height / 7,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    flex: 2,
-                                    child: Container(
-                                      height: height / 7,
-                                      child: Image.network(e['thumbnail']),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 3,
-                                    child: Container(
-                                      padding: EdgeInsets.all(10),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "${e['title']}",
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 19,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              SizedBox(height: 20),
-                                              Text(
-                                                "\$ ${e['price']}",
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 19,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          GestureDetector(
-                                            onTap: () {
-                                              setState(() {
-                                                Global.cartProducts.remove(e);
-                                                Global.totalPrice -= e['price'];
-                                              });
-                                            },
-                                            child: Icon(
-                                                Icons.remove_circle_outline,
-                                                color: Colors.red),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 10),
+                            height: 120,
+                            width: 350,
+                            decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
                               ),
+                              color: Colors.black12,
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 2,
+                                  child: Container(
+                                    child: CircleAvatar(
+                                      radius: 40,
+                                      backgroundImage:
+                                          NetworkImage(e['thumbnail']),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 4,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const SizedBox(height: 9),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  "${e['title']}",
+                                                  style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    CircleAvatar(
+                                                      radius: 15,
+                                                      backgroundColor:
+                                                          Colors.grey,
+                                                      child: IconButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            (e['qty'] > 1)
+                                                                ? e['qty']--
+                                                                : e['qty'] = 1;
+                                                          });
+                                                        },
+                                                        icon: const Icon(
+                                                          Icons.remove,
+                                                          size: 10,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(width: 10),
+                                                    Text(
+                                                      "${e['qty']}",
+                                                      style: const TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 15),
+                                                    ),
+                                                    SizedBox(width: 10),
+                                                    CircleAvatar(
+                                                      radius: 15,
+                                                      backgroundColor:
+                                                          Colors.grey,
+                                                      child: IconButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            e['qty']++;
+                                                            Global.totalPrice =
+                                                                Global
+                                                                    .TotalPrice();
+                                                          });
+                                                        },
+                                                        icon: const Icon(
+                                                          Icons.add,
+                                                          size: 10,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 10),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "\$ ${e['price']}",
+                                                  style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 17,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      Global.cartProducts
+                                                          .remove(e);
+
+                                                      Global.totalPrice -=
+                                                          e['price'];
+                                                    });
+                                                  },
+                                                  child: const Icon(
+                                                      Icons
+                                                          .remove_circle_outline,
+                                                      color: Colors.red),
+                                                ),
+                                                SizedBox(width: 80),
+                                                Text(
+                                                  "\$ ${e['price'] * e['qty']}",
+                                                  style: const TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         );
@@ -154,7 +245,7 @@ class _cartPageState extends State<cartPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         border: Border(
                           bottom: BorderSide(
                             color: Colors.grey,
@@ -162,26 +253,36 @@ class _cartPageState extends State<cartPage> {
                           ),
                         ),
                       ),
-                      padding: EdgeInsets.only(bottom: 10),
+                      padding: const EdgeInsets.only(bottom: 10),
                       width: 340,
                       child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              child: Text("SubTotal:"),
-                            ),
-                            Text(
-                              "\$ ${Global.totalPrice}",
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                              ),
-                            )
-                          ]),
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            child: const Text("SubTotal:"),
+                          ),
+                          (Global.totalPrice > 0)
+                              ? Text(
+                                  "Rs. ${Global.subTotal}",
+                                  style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                )
+                              : const Text(
+                                  "Rs. 0",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                        ],
+                      ),
                     ),
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         border: Border(
                           bottom: BorderSide(
                             color: Colors.grey,
@@ -189,26 +290,36 @@ class _cartPageState extends State<cartPage> {
                           ),
                         ),
                       ),
-                      padding: EdgeInsets.only(bottom: 10),
+                      padding: const EdgeInsets.only(bottom: 10),
                       width: 340,
                       child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              child: Text("Delivery:"),
-                            ),
-                            Text(
-                              "\$ ${Global.totalPrice}",
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                              ),
-                            )
-                          ]),
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            child: const Text("Delivery:"),
+                          ),
+                          (Global.totalPrice > 0)
+                              ? Text(
+                                  "Rs. 60.00",
+                                  style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                )
+                              : const Text(
+                                  "Rs. 0",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                        ],
+                      ),
                     ),
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         border: Border(
                           bottom: BorderSide(
                             color: Colors.grey,
@@ -216,34 +327,44 @@ class _cartPageState extends State<cartPage> {
                           ),
                         ),
                       ),
-                      padding: EdgeInsets.only(bottom: 10),
+                      padding: const EdgeInsets.only(bottom: 10),
                       width: 340,
                       child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              child: Text("Total:"),
-                            ),
-                            Text(
-                              "\$ ${Global.totalPrice}",
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                              ),
-                            )
-                          ]),
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            child: const Text("Total:"),
+                          ),
+                          (Global.totalPrice > 0)
+                              ? Text(
+                                  "\$ ${Global.totalPrice}",
+                                  style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                )
+                              : const Text(
+                                  "Rs. 0",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                        ],
+                      ),
                     ),
                     Container(
                       height: 70,
                       width: 370,
-                      decoration: BoxDecoration(
-                        color: Colors.greenAccent,
+                      decoration: const BoxDecoration(
+                        color: Color(0xff6cd551),
                         borderRadius: BorderRadius.all(
                           Radius.circular(20),
                         ),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "Check Out",
                           style: TextStyle(

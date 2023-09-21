@@ -1,4 +1,3 @@
-import 'package:appmania/cart_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +11,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  bool tapped = false;
+  var tap = false;
   int? dropdownvalue;
   @override
   Widget build(BuildContext context) {
@@ -67,7 +66,7 @@ class _HomeState extends State<Home> {
         child: Column(
           children: [
             Expanded(
-              flex: 3,
+              flex: 2,
               child: Container(
                 padding: const EdgeInsets.only(left: 28),
                 child: Column(
@@ -153,32 +152,6 @@ class _HomeState extends State<Home> {
                         ),
                       ],
                     ),
-                    const Row(
-                      children: [
-                        Text.rich(
-                          TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Find',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 25,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              TextSpan(
-                                text: '  5km>',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 15,
-                                  color: Colors.deepOrange,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
@@ -191,387 +164,492 @@ class _HomeState extends State<Home> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ...Global.allProducts.map((e) {
-                        List d = e['data'];
-                        return (dropdownvalue == null)
-                            ? Container(
-                                width: 383,
-                                height: 320,
-                                child: Column(
-                                  children: [
-                                    SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Row(
-                                        children: [
-                                          ...d.map(
-                                            (e) {
-                                              return GestureDetector(
-                                                onTap: () {
-                                                  setState(() {
-                                                    Navigator.of(context)
-                                                        .pushNamed('second',
-                                                            arguments: e);
-                                                  });
-                                                },
-                                                child: Container(
-                                                  margin: const EdgeInsets.only(
-                                                      left: 10),
-                                                  width: 180,
-                                                  height: 280,
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                    color: Color(0xffdee0e5),
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                      Radius.circular(10),
+                      (dropdownvalue == null)
+                          ? const Row(
+                              children: [
+                                SizedBox(width: 20),
+                                Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'Find',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: '  5km>',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 15,
+                                          color: Colors.deepOrange,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                              ],
+                            )
+                          : Container(),
+                      ...Global.allProducts.map(
+                        (e) {
+                          List d = e['data'];
+                          return (dropdownvalue == null)
+                              ? Container(
+                                  width: 383,
+                                  height: 320,
+                                  child: Column(
+                                    children: [
+                                      SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Row(
+                                          children: [
+                                            ...d.map(
+                                              (e) {
+                                                return GestureDetector(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      Navigator.of(context)
+                                                          .pushNamed('second',
+                                                              arguments: e);
+                                                    });
+                                                  },
+                                                  child: Container(
+                                                    margin:
+                                                        const EdgeInsets.only(
+                                                            left: 10),
+                                                    width: 180,
+                                                    height: 280,
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                      color: Color(0xffdee0e5),
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                        Radius.circular(10),
+                                                      ),
                                                     ),
-                                                  ),
-                                                  child: Column(
-                                                    children: [
-                                                      Expanded(
-                                                        flex: 2,
-                                                        child: Container(
-                                                          child: Stack(
-                                                            children: [
-                                                              Center(
-                                                                child:
-                                                                    CircleAvatar(
-                                                                  backgroundImage:
-                                                                      NetworkImage(
-                                                                          "${e['thumbnail']}"),
-                                                                  radius: 70,
+                                                    child: Column(
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 2,
+                                                          child: Container(
+                                                            child: Stack(
+                                                              children: [
+                                                                Center(
+                                                                  child:
+                                                                      CircleAvatar(
+                                                                    backgroundImage:
+                                                                        NetworkImage(
+                                                                            "${e['thumbnail']}"),
+                                                                    radius: 70,
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                              Align(
-                                                                alignment:
-                                                                    Alignment
-                                                                        .topRight,
+                                                                Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .topRight,
+                                                                  child:
+                                                                      IconButton(
+                                                                    onPressed:
+                                                                        () {
+                                                                      setState(
+                                                                          () {
+                                                                        (e['fav'] ==
+                                                                                true)
+                                                                            ? e['fav'] =
+                                                                                false
+                                                                            : e['fav'] =
+                                                                                true;
+                                                                        Global
+                                                                            .likeProducts
+                                                                            .add(e);
+                                                                      });
+                                                                    },
+                                                                    icon: (e['fav'] ==
+                                                                            false)
+                                                                        ? const Icon(
+                                                                            CupertinoIcons.heart,
+                                                                            color:
+                                                                                Colors.black,
+                                                                          )
+                                                                        : const Icon(
+                                                                            CupertinoIcons.heart_fill,
+                                                                            color:
+                                                                                Colors.black,
+                                                                          ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child: Container(
+                                                            child: Column(
+                                                              children: [
+                                                                Text(
+                                                                  "${e['title']}",
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    fontSize:
+                                                                        20,
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                  ),
+                                                                ),
+                                                                const SizedBox(
+                                                                    height: 20),
+                                                                Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  children: [
+                                                                    const SizedBox(
+                                                                        width:
+                                                                            20),
+                                                                    const Text(
+                                                                      "10min",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontSize:
+                                                                            15,
+                                                                        color: Colors
+                                                                            .grey,
+                                                                        fontWeight:
+                                                                            FontWeight.normal,
+                                                                      ),
+                                                                    ),
+                                                                    Text(
+                                                                      "⭐ ${e['rating']}",
+                                                                      style:
+                                                                          const TextStyle(
+                                                                        fontSize:
+                                                                            15,
+                                                                        color: Colors
+                                                                            .grey,
+                                                                        fontWeight:
+                                                                            FontWeight.normal,
+                                                                      ),
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        width:
+                                                                            20),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Stack(
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                const SizedBox(
+                                                                    width: 20),
+                                                                Text(
+                                                                    "${e['price']}.00",
+                                                                    style: const TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w400,
+                                                                        fontSize:
+                                                                            20)),
+                                                              ],
+                                                            ),
+                                                            Align(
+                                                              alignment:
+                                                                  Alignment
+                                                                      .topRight,
+                                                              child: Container(
+                                                                height: 40,
+                                                                width: 50,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: Colors
+                                                                      .greenAccent
+                                                                      .shade700,
+                                                                  borderRadius:
+                                                                      const BorderRadius
+                                                                          .only(
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                            20),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            10),
+                                                                  ),
+                                                                ),
                                                                 child:
                                                                     IconButton(
                                                                   onPressed:
                                                                       () {
                                                                     setState(
                                                                         () {
-                                                                      (e['fav'] ==
-                                                                              true)
-                                                                          ? e['fav'] =
-                                                                              false
-                                                                          : e['fav'] =
-                                                                              true;
+                                                                      Global
+                                                                          .cartProducts
+                                                                          .add(
+                                                                              e);
+                                                                      Global.totalPrice =
+                                                                          Global
+                                                                              .TotalPrice();
                                                                     });
                                                                   },
-                                                                  icon: (e['fav'] ==
-                                                                          false)
-                                                                      ? const Icon(
-                                                                          CupertinoIcons
-                                                                              .heart,
-                                                                          color:
-                                                                              Colors.black,
-                                                                        )
-                                                                      : const Icon(
-                                                                          CupertinoIcons
-                                                                              .heart_fill,
-                                                                          color:
-                                                                              Colors.black,
-                                                                        ),
+                                                                  icon:
+                                                                      const Icon(
+                                                                    Icons.add,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
                                                                 ),
                                                               ),
-                                                            ],
-                                                          ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                      ),
-                                                      Expanded(
-                                                        flex: 1,
-                                                        child: Container(
-                                                          child: Column(
-                                                            children: [
-                                                              Text(
-                                                                "${e['title']}",
-                                                                style:
-                                                                    const TextStyle(
-                                                                  fontSize: 20,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                ),
-                                                              ),
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                children: [
-                                                                  const SizedBox(
-                                                                      width:
-                                                                          20),
-                                                                  const Text(
-                                                                    "10min",
-                                                                    style:
-                                                                        TextStyle(
-                                                                      fontSize:
-                                                                          15,
-                                                                      color: Colors
-                                                                          .grey,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .normal,
-                                                                    ),
-                                                                  ),
-                                                                  Text(
-                                                                    "⭐ ${e['rating']}",
-                                                                    style:
-                                                                        const TextStyle(
-                                                                      fontSize:
-                                                                          15,
-                                                                      color: Colors
-                                                                          .grey,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .normal,
-                                                                    ),
-                                                                  ),
-                                                                  const SizedBox(
-                                                                      width:
-                                                                          20),
-                                                                ],
-                                                              ),
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  const SizedBox(
-                                                                      width:
-                                                                          10),
-                                                                  Column(
-                                                                    children: [
-                                                                      Text(
-                                                                          "${e['price']}.00",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.w400,
-                                                                              fontSize: 20)),
-                                                                    ],
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                              );
-                                            },
-                                          ).toList(),
-                                        ],
+                                                );
+                                              },
+                                            ).toList(),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            : (dropdownvalue == Global.allProducts.indexOf(e)
-                                ? Container(
-                                    width: 383,
-                                    height: 320,
-                                    child: Column(
-                                      children: [
-                                        SingleChildScrollView(
-                                          scrollDirection: Axis.horizontal,
-                                          child: Row(
-                                            children: [
-                                              ...d.map(
-                                                (e) {
-                                                  return GestureDetector(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        Navigator.of(context)
-                                                            .pushNamed('second',
-                                                                arguments: e);
-                                                      });
-                                                    },
-                                                    child: Container(
-                                                      margin:
-                                                          const EdgeInsets.only(
-                                                              left: 10),
-                                                      width: 180,
-                                                      height: 280,
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                        color:
-                                                            Color(0xffdee0e5),
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                          Radius.circular(10),
+                                    ],
+                                  ),
+                                )
+                              : (dropdownvalue == Global.allProducts.indexOf(e)
+                                  ? Container(
+                                      width: 383,
+                                      height: 320,
+                                      child: Column(
+                                        children: [
+                                          SingleChildScrollView(
+                                            scrollDirection: Axis.horizontal,
+                                            child: Row(
+                                              children: [
+                                                ...d.map(
+                                                  (e) {
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Navigator.of(context)
+                                                              .pushNamed(
+                                                                  'second',
+                                                                  arguments: e);
+                                                        });
+                                                      },
+                                                      child: Container(
+                                                        margin: const EdgeInsets
+                                                            .only(left: 10),
+                                                        width: 180,
+                                                        height: 280,
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          color:
+                                                              Color(0xffdee0e5),
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                            Radius.circular(10),
+                                                          ),
                                                         ),
-                                                      ),
-                                                      child: Column(
-                                                        children: [
-                                                          Expanded(
-                                                            flex: 2,
-                                                            child: Container(
-                                                              child: Stack(
-                                                                children: [
-                                                                  Center(
-                                                                    child:
-                                                                        CircleAvatar(
-                                                                      backgroundImage:
-                                                                          NetworkImage(
-                                                                              "${e['thumbnail']}"),
-                                                                      radius:
-                                                                          70,
+                                                        child: Column(
+                                                          children: [
+                                                            Expanded(
+                                                              flex: 2,
+                                                              child: Container(
+                                                                child: Stack(
+                                                                  children: [
+                                                                    Center(
+                                                                      child:
+                                                                          CircleAvatar(
+                                                                        backgroundImage:
+                                                                            NetworkImage("${e['thumbnail']}"),
+                                                                        radius:
+                                                                            70,
+                                                                      ),
                                                                     ),
-                                                                  ),
-                                                                  Align(
-                                                                    alignment:
-                                                                        Alignment
-                                                                            .topRight,
+                                                                    Align(
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .topRight,
+                                                                      child:
+                                                                          IconButton(
+                                                                        onPressed:
+                                                                            () {
+                                                                          setState(
+                                                                            () {
+                                                                              (e['fav'] == true) ? e['fav'] = false : e['fav'] = true;
+                                                                              (e['fav'] == true) ? Global.likeProducts.add(e) : Global.likeProducts.remove(e);
+                                                                            },
+                                                                          );
+                                                                        },
+                                                                        icon: (e['fav'] ==
+                                                                                false)
+                                                                            ? const Icon(
+                                                                                CupertinoIcons.heart,
+                                                                                color: Colors.black,
+                                                                              )
+                                                                            : const Icon(
+                                                                                CupertinoIcons.heart_fill,
+                                                                                color: Colors.black,
+                                                                              ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              flex: 1,
+                                                              child: Container(
+                                                                child: Column(
+                                                                  children: [
+                                                                    Text(
+                                                                      "${e['title']}",
+                                                                      style:
+                                                                          const TextStyle(
+                                                                        fontSize:
+                                                                            20,
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                      ),
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            20),
+                                                                    Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceBetween,
+                                                                      children: [
+                                                                        const SizedBox(
+                                                                            width:
+                                                                                20),
+                                                                        const Text(
+                                                                          "10min",
+                                                                          style:
+                                                                              TextStyle(
+                                                                            fontSize:
+                                                                                15,
+                                                                            color:
+                                                                                Colors.grey,
+                                                                            fontWeight:
+                                                                                FontWeight.normal,
+                                                                          ),
+                                                                        ),
+                                                                        Text(
+                                                                          "⭐ ${e['rating']}",
+                                                                          style:
+                                                                              const TextStyle(
+                                                                            fontSize:
+                                                                                15,
+                                                                            color:
+                                                                                Colors.grey,
+                                                                            fontWeight:
+                                                                                FontWeight.normal,
+                                                                          ),
+                                                                        ),
+                                                                        const SizedBox(
+                                                                            width:
+                                                                                20),
+                                                                      ],
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Stack(
+                                                              children: [
+                                                                Row(
+                                                                  children: [
+                                                                    const SizedBox(
+                                                                        width:
+                                                                            20),
+                                                                    Text(
+                                                                        "${e['price']}.00",
+                                                                        style: const TextStyle(
+                                                                            fontWeight:
+                                                                                FontWeight.w400,
+                                                                            fontSize: 20)),
+                                                                  ],
+                                                                ),
+                                                                Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .topRight,
+                                                                  child:
+                                                                      Container(
+                                                                    height: 40,
+                                                                    width: 50,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: Colors
+                                                                          .greenAccent
+                                                                          .shade700,
+                                                                      borderRadius:
+                                                                          const BorderRadius
+                                                                              .only(
+                                                                        topLeft:
+                                                                            Radius.circular(20),
+                                                                        bottomRight:
+                                                                            Radius.circular(10),
+                                                                      ),
+                                                                    ),
                                                                     child:
                                                                         IconButton(
                                                                       onPressed:
                                                                           () {
                                                                         setState(
                                                                             () {
-                                                                          (e['fav'] == true)
-                                                                              ? e['fav'] = false
-                                                                              : e['fav'] = true;
+                                                                          e['inCart'] =
+                                                                              !false;
+                                                                          Global.totalPrice =
+                                                                              Global.TotalPrice();
+
+                                                                          Global
+                                                                              .cartProducts
+                                                                              .add(e);
                                                                         });
                                                                       },
-                                                                      icon: (e['fav'] ==
+                                                                      icon: (e['inCart'] ==
                                                                               false)
                                                                           ? const Icon(
-                                                                              CupertinoIcons.heart,
-                                                                              color: Colors.black,
+                                                                              Icons.remove,
+                                                                              color: Colors.white,
                                                                             )
                                                                           : const Icon(
-                                                                              CupertinoIcons.heart_fill,
-                                                                              color: Colors.black,
+                                                                              Icons.add,
+                                                                              color: Colors.white,
                                                                             ),
                                                                     ),
                                                                   ),
-                                                                ],
-                                                              ),
+                                                                ),
+                                                              ],
                                                             ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 1,
-                                                            child: Container(
-                                                              child: Column(
-                                                                children: [
-                                                                  Text(
-                                                                    "${e['title']}",
-                                                                    style:
-                                                                        const TextStyle(
-                                                                      fontSize:
-                                                                          20,
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                                  ),
-                                                                  Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .spaceBetween,
-                                                                    children: [
-                                                                      const SizedBox(
-                                                                          width:
-                                                                              20),
-                                                                      const Text(
-                                                                        "10min",
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontSize:
-                                                                              15,
-                                                                          color:
-                                                                              Colors.grey,
-                                                                          fontWeight:
-                                                                              FontWeight.normal,
-                                                                        ),
-                                                                      ),
-                                                                      Text(
-                                                                        "⭐ ${e['rating']}",
-                                                                        style:
-                                                                            const TextStyle(
-                                                                          fontSize:
-                                                                              15,
-                                                                          color:
-                                                                              Colors.grey,
-                                                                          fontWeight:
-                                                                              FontWeight.normal,
-                                                                        ),
-                                                                      ),
-                                                                      const SizedBox(
-                                                                          width:
-                                                                              20),
-                                                                    ],
-                                                                  ),
-                                                                  Row(
-                                                                    children: [
-                                                                      const SizedBox(
-                                                                          width:
-                                                                              20),
-                                                                      Text(
-                                                                          "${e['price']}.00",
-                                                                          style: const TextStyle(
-                                                                              fontWeight: FontWeight.w400,
-                                                                              fontSize: 20)),
-                                                                      Container(
-                                                                        height:
-                                                                            40,
-                                                                        width:
-                                                                            40,
-                                                                        decoration:
-                                                                            const BoxDecoration(
-                                                                          color:
-                                                                              Color(0xff5ed240),
-                                                                          borderRadius:
-                                                                              BorderRadius.only(
-                                                                            topLeft:
-                                                                                Radius.circular(10),
-                                                                            bottomRight:
-                                                                                Radius.circular(10),
-                                                                          ),
-                                                                        ),
-                                                                        padding: const EdgeInsets
-                                                                            .only(
-                                                                            right:
-                                                                                2),
-                                                                        child:
-                                                                            IconButton(
-                                                                          onPressed:
-                                                                              () {},
-                                                                          icon:
-                                                                              const Icon(
-                                                                            Icons.add,
-                                                                            color:
-                                                                                Colors.white,
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
+                                                          ],
+                                                        ),
                                                       ),
-                                                    ),
-                                                  );
-                                                },
-                                              ).toList(),
-                                            ],
+                                                    );
+                                                  },
+                                                ).toList(),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                : Container());
-                      }).toList(),
+                                        ],
+                                      ),
+                                    )
+                                  : Container());
+                        },
+                      ).toList(),
                     ],
                   ),
                 ),

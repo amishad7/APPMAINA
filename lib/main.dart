@@ -1,4 +1,5 @@
 import 'package:appmania/info_page.dart';
+import 'package:appmania/likedProducts.dart';
 import 'package:flutter/material.dart';
 
 import 'cart_page.dart';
@@ -12,7 +13,7 @@ void main() {
         '/': (context) => Home(),
         'second': (context) => infoPage(),
         'third': (context) => cartPage(),
-        'four': (context) => infoPage(),
+        'four': (context) => favPage(),
       },
     ),
   );

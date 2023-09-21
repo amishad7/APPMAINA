@@ -22,7 +22,7 @@ class _infoPageState extends State<infoPage> {
           IconButton(
             onPressed: () {
               setState(() {
-                Navigator.of(context).pushNamed('four');
+                Navigator.of(context).pushNamed('four', arguments: data);
               });
             },
             icon: const Icon(CupertinoIcons.suit_heart),
@@ -38,7 +38,7 @@ class _infoPageState extends State<infoPage> {
               child: Container(
                 height: 600,
                 width: double.infinity,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(15),
                     topLeft: Radius.circular(15),
@@ -50,11 +50,11 @@ class _infoPageState extends State<infoPage> {
                     Column(
                       //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(height: 150),
+                        const SizedBox(height: 150),
                         Container(
                           height: 35,
                           width: 110,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(14)),
                             boxShadow: [
                               BoxShadow(
@@ -69,58 +69,61 @@ class _infoPageState extends State<infoPage> {
                               IconButton(
                                 onPressed: () {
                                   setState(() {
-                                    Global.qty++;
+                                    (data['qty'] > 1)
+                                        ? data['qty']--
+                                        : data['qty'] = 1;
                                   });
                                 },
-                                icon: Icon(
-                                  Icons.add,
+                                icon: const Icon(
+                                  Icons.remove,
                                   color: Colors.white,
                                 ),
                               ),
                               Text(
-                                "${Global.qty}",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 15),
+                                "${data['qty']}",
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               IconButton(
                                 onPressed: () {
                                   setState(() {
-                                    (Global.qty > 1)
-                                        ? Global.qty--
-                                        : Global.qty = 1;
+                                    data['qty']++;
                                   });
                                 },
-                                icon: Icon(
-                                  Icons.remove,
+                                icon: const Icon(
+                                  Icons.add,
                                   color: Colors.white,
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        SizedBox(height: 70),
+                        const SizedBox(height: 70),
                         Container(
-                          padding: EdgeInsets.only(left: 20),
+                          padding: const EdgeInsets.only(left: 20),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 "${data['title']}",
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.black, fontSize: 25),
                               ),
                               Text(
                                 "${data['description']}",
-                                style:
-                                    TextStyle(color: Colors.grey, fontSize: 15),
+                                style: const TextStyle(
+                                    color: Colors.grey, fontSize: 15),
                               ),
                             ],
                           ),
                         ),
-                        SizedBox(height: 30),
-                        SizedBox(height: 30),
-                        Row(
+                        const SizedBox(height: 30),
+                        const SizedBox(height: 30),
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text("⭐️4.4"),
@@ -128,7 +131,7 @@ class _infoPageState extends State<infoPage> {
                             Text("⏰20min"),
                           ],
                         ),
-                        SizedBox(height: 60),
+                        const SizedBox(height: 60),
                         GestureDetector(
                           onTap: () {
                             setState(() {
@@ -136,28 +139,36 @@ class _infoPageState extends State<infoPage> {
                               Global.totalPrice += data['price'];
                             });
                           },
-                          child: Container(
-                            width: 360,
-                            height: 70,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(20),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color(0xff6cd551),
-                                  blurRadius: 10,
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                Global.cartProducts.add(data);
+                                Global.totalPrice = Global.TotalPrice();
+                              });
+                            },
+                            child: Container(
+                              width: 360,
+                              height: 70,
+                              decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20),
                                 ),
-                              ],
-                              color: Color(0xff6cd551),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Add To Cart",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0xff6cd551),
+                                    blurRadius: 10,
+                                  ),
+                                ],
+                                color: Color(0xff6cd551),
+                              ),
+                              child: Center(
+                                child: const Text(
+                                  "Add To Cart",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ),
@@ -170,14 +181,17 @@ class _infoPageState extends State<infoPage> {
               ),
             ),
             Align(
-              alignment: Alignment(0, -0.9),
+              alignment: const Alignment(0, -0.9),
               child: CircleAvatar(
-                radius: 100,
+                radius: 130,
                 backgroundColor: Colors.transparent,
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.transparent,
                     shape: BoxShape.circle,
+                    boxShadow: [
+                      const BoxShadow(color: Color(0xff6cd551), blurRadius: 50),
+                    ],
                     image: DecorationImage(
                       image: NetworkImage('${data['thumbnail']}'),
                       fit: BoxFit.fill,
