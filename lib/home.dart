@@ -252,11 +252,15 @@ class _HomeState extends State<Home> {
                                                                       () {
                                                                     setState(
                                                                         () {
-                                                                      tapped =
-                                                                          true;
+                                                                      (e['fav'] ==
+                                                                              true)
+                                                                          ? e['fav'] =
+                                                                              false
+                                                                          : e['fav'] =
+                                                                              true;
                                                                     });
                                                                   },
-                                                                  icon: (tapped ==
+                                                                  icon: (e['fav'] ==
                                                                           false)
                                                                       ? const Icon(
                                                                           CupertinoIcons
@@ -337,7 +341,7 @@ class _HomeState extends State<Home> {
                                                                     MainAxisAlignment
                                                                         .start,
                                                                 children: [
-                                                                  SizedBox(
+                                                                  const SizedBox(
                                                                       width:
                                                                           10),
                                                                   Column(
@@ -429,11 +433,12 @@ class _HomeState extends State<Home> {
                                                                           () {
                                                                         setState(
                                                                             () {
-                                                                          tapped =
-                                                                              true;
+                                                                          (e['fav'] == true)
+                                                                              ? e['fav'] = false
+                                                                              : e['fav'] = true;
                                                                         });
                                                                       },
-                                                                      icon: (tapped ==
+                                                                      icon: (e['fav'] ==
                                                                               false)
                                                                           ? const Icon(
                                                                               CupertinoIcons.heart,
