@@ -27,24 +27,71 @@ class _infoPageState extends State<infoPage> {
         ],
       ),
       backgroundColor: Colors.greenAccent,
-      body: SizedBox(
-        height: double.infinity,
-        width: double.infinity,
+      body: Container(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Expanded(flex: 3, child: Container()),
             Expanded(
-              flex: 7,
+              flex: 2,
               child: Container(
-                height: 500,
-                width: 400,
-                decoration: const BoxDecoration(
-                  color: Color(0xfff4f4f4),
+                color: Colors.greenAccent,
+              ),
+            ),
+            Expanded(
+              flex: 8,
+              child: Container(
+                decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
+                    topRight: Radius.circular(15),
+                    topLeft: Radius.circular(15),
                   ),
+                  color: Colors.white,
+                ),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius: 50,
+                    ),
+                    Container(
+                      height: 25,
+                      width: 45,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(14)),
+                        color: Colors.green,
+                      ),
+                      child: Row(
+                        children: [
+                          IconButton(onPressed: () {}, icon: Icon(Icons.add)),
+                          Text(
+                            "1",
+                            style: TextStyle(color: Colors.white, fontSize: 15),
+                          ),
+                          IconButton(
+                              onPressed: () {}, icon: Icon(Icons.remove)),
+                        ],
+                      ),
+                    ),
+                    Text(
+                      "Salad",
+                      style: TextStyle(color: Colors.black, fontSize: 25),
+                    ),
+                    Text(
+                      "asdfghjklkjhgfdsasdfghjkmnxcvbnmnbvsdfghjkjhgfdsrtyuhgfddfghjkjhgfdsfghjsdfghnbcvbngndgdgbsdfhbvfdhvjbafduhvbadskhjkbvhsvhdvdfvdbfvdfubvhbv",
+                      style: TextStyle(color: Colors.grey, fontSize: 15),
+                    ),
+                    Row(
+                      children: [
+                        Text("4.4"),
+                        Text("100 cal"),
+                        Text("20min"),
+                      ],
+                    ),
+                    Container(
+                      width: 200,
+                      height: 70,
+                      color: Colors.green,
+                    ),
+                  ],
                 ),
               ),
             ),
