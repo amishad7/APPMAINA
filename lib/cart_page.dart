@@ -29,7 +29,7 @@ class _cartPageState extends State<cartPage> {
             icon: const Icon(CupertinoIcons.heart),
           ),
         ],
-        backgroundColor: Color(0xff6cd551),
+        backgroundColor: const Color(0xff6cd551),
         title: const Text(
           'Cart ',
           style: TextStyle(
@@ -41,13 +41,13 @@ class _cartPageState extends State<cartPage> {
       ),
       backgroundColor: Colors.white,
       body: Container(
-        color: Color(0xff6cd551),
+        color: const Color(0xff6cd551),
         child: Column(
           children: [
             Expanded(
               flex: 1,
               child: Container(
-                color: Color(0xff6cd551),
+                color: const Color(0xff6cd551),
               ),
             ),
             Expanded(
@@ -149,14 +149,14 @@ class _cartPageState extends State<cartPage> {
                                                         ),
                                                       ),
                                                     ),
-                                                    SizedBox(width: 10),
+                                                    const SizedBox(width: 10),
                                                     Text(
                                                       "${e['qty']}",
                                                       style: const TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 15),
                                                     ),
-                                                    SizedBox(width: 10),
+                                                    const SizedBox(width: 10),
                                                     CircleAvatar(
                                                       radius: 15,
                                                       backgroundColor:
@@ -199,9 +199,11 @@ class _cartPageState extends State<cartPage> {
                                                     setState(() {
                                                       Global.cartProducts
                                                           .remove(e);
-
+                                                      e['inCart'] = false;
                                                       Global.totalPrice -=
-                                                          e['price'];
+                                                          (e['price'] *
+                                                              e['qty']);
+                                                      e['qty'] = 1;
                                                     });
                                                   },
                                                   child: const Icon(
@@ -209,7 +211,7 @@ class _cartPageState extends State<cartPage> {
                                                           .remove_circle_outline,
                                                       color: Colors.red),
                                                 ),
-                                                SizedBox(width: 80),
+                                                const SizedBox(width: 80),
                                                 Text(
                                                   "\$ ${e['price'] * e['qty']}",
                                                   style: const TextStyle(
@@ -299,9 +301,9 @@ class _cartPageState extends State<cartPage> {
                             child: const Text("Delivery:"),
                           ),
                           (Global.totalPrice > 0)
-                              ? Text(
+                              ? const Text(
                                   "Rs. 60.00",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     color: Colors.grey,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15,

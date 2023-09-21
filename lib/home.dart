@@ -11,7 +11,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var tap = false;
   int? dropdownvalue;
   @override
   Widget build(BuildContext context) {
@@ -57,6 +56,17 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ],
+          ),
+          IconButton(
+            onPressed: () {
+              setState(() {
+                Navigator.of(context).pushNamed('four');
+              });
+            },
+            icon: const Icon(
+              CupertinoIcons.suit_heart,
+              color: Colors.green,
+            ),
           ),
         ],
         elevation: 0,
@@ -396,17 +406,27 @@ class _HomeState extends State<Home> {
                                                                           .cartProducts
                                                                           .add(
                                                                               e);
+                                                                      e['inCart'] =
+                                                                          true;
                                                                       Global.totalPrice =
                                                                           Global
                                                                               .TotalPrice();
                                                                     });
                                                                   },
-                                                                  icon:
-                                                                      const Icon(
-                                                                    Icons.add,
-                                                                    color: Colors
-                                                                        .white,
-                                                                  ),
+                                                                  icon: (e['inCart'] ==
+                                                                          false)
+                                                                      ? const Icon(
+                                                                          Icons
+                                                                              .add,
+                                                                          color:
+                                                                              Colors.white,
+                                                                        )
+                                                                      : const Icon(
+                                                                          Icons
+                                                                              .remove,
+                                                                          color:
+                                                                              Colors.white,
+                                                                        ),
                                                                 ),
                                                               ),
                                                             ),
@@ -484,11 +504,12 @@ class _HomeState extends State<Home> {
                                                                         onPressed:
                                                                             () {
                                                                           setState(
-                                                                            () {
-                                                                              (e['fav'] == true) ? e['fav'] = false : e['fav'] = true;
-                                                                              (e['fav'] == true) ? Global.likeProducts.add(e) : Global.likeProducts.remove(e);
-                                                                            },
-                                                                          );
+                                                                              () {
+                                                                            (e['fav'] == true)
+                                                                                ? e['fav'] = false
+                                                                                : e['fav'] = true;
+                                                                            Global.likeProducts.add(e);
+                                                                          });
                                                                         },
                                                                         icon: (e['fav'] ==
                                                                                 false)
@@ -610,24 +631,23 @@ class _HomeState extends State<Home> {
                                                                           () {
                                                                         setState(
                                                                             () {
-                                                                          e['inCart'] =
-                                                                              !false;
-                                                                          Global.totalPrice =
-                                                                              Global.TotalPrice();
-
                                                                           Global
                                                                               .cartProducts
                                                                               .add(e);
+                                                                          e['inCart'] =
+                                                                              true;
+                                                                          Global.totalPrice =
+                                                                              Global.TotalPrice();
                                                                         });
                                                                       },
                                                                       icon: (e['inCart'] ==
                                                                               false)
                                                                           ? const Icon(
-                                                                              Icons.remove,
+                                                                              Icons.add,
                                                                               color: Colors.white,
                                                                             )
                                                                           : const Icon(
-                                                                              Icons.add,
+                                                                              Icons.remove,
                                                                               color: Colors.white,
                                                                             ),
                                                                     ),

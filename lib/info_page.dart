@@ -53,7 +53,7 @@ class _infoPageState extends State<infoPage> {
                         const SizedBox(height: 150),
                         Container(
                           height: 35,
-                          width: 110,
+                          width: 120,
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(14)),
                             boxShadow: [
@@ -65,6 +65,7 @@ class _infoPageState extends State<infoPage> {
                             color: Colors.green,
                           ),
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               IconButton(
                                 onPressed: () {
@@ -144,6 +145,7 @@ class _infoPageState extends State<infoPage> {
                               setState(() {
                                 Global.cartProducts.add(data);
                                 Global.totalPrice = Global.TotalPrice();
+                                data['inCart'] != true;
                               });
                             },
                             child: Container(
@@ -161,16 +163,27 @@ class _infoPageState extends State<infoPage> {
                                 ],
                                 color: Color(0xff6cd551),
                               ),
-                              child: Center(
-                                child: const Text(
-                                  "Add To Cart",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
+                              child: (data['inCart'] == true)
+                                  ? const Center(
+                                      child: Text(
+                                        "Product is Added ",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    )
+                                  : const Center(
+                                      child: Text(
+                                        "Add To Cart",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
                             ),
                           ),
                         ),
