@@ -12,6 +12,7 @@ void main() {
         '/': (context) => Home(),
         'second': (context) => infoPage(),
         'third': (context) => cartPage(),
+        'four': (context) => infoPage(),
       },
     ),
   );

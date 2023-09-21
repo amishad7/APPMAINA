@@ -1,3 +1,4 @@
+import 'package:appmania/utils/Global.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -20,25 +21,23 @@ class _infoPageState extends State<infoPage> {
         actions: [
           IconButton(
             onPressed: () {
-              setState(() {});
+              setState(() {
+                Navigator.of(context).pushNamed('four');
+              });
             },
             icon: const Icon(CupertinoIcons.suit_heart),
           ),
         ],
       ),
-      backgroundColor: Colors.greenAccent,
+      backgroundColor: const Color(0xff6cd551),
       body: Container(
-        child: Column(
+        child: Stack(
           children: [
-            Expanded(
-              flex: 2,
+            Align(
+              alignment: Alignment.bottomCenter,
               child: Container(
-                color: Colors.greenAccent,
-              ),
-            ),
-            Expanded(
-              flex: 8,
-              child: Container(
+                height: 600,
+                width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(15),
@@ -47,51 +46,143 @@ class _infoPageState extends State<infoPage> {
                   color: Colors.white,
                 ),
                 child: Stack(
-                  alignment: Alignment.center,
                   children: [
-                    CircleAvatar(
-                      radius: 50,
-                    ),
-                    Container(
-                      height: 25,
-                      width: 45,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(14)),
-                        color: Colors.green,
-                      ),
-                      child: Row(
-                        children: [
-                          IconButton(onPressed: () {}, icon: Icon(Icons.add)),
-                          Text(
-                            "1",
-                            style: TextStyle(color: Colors.white, fontSize: 15),
-                          ),
-                          IconButton(
-                              onPressed: () {}, icon: Icon(Icons.remove)),
-                        ],
-                      ),
-                    ),
-                    Text(
-                      "Salad",
-                      style: TextStyle(color: Colors.black, fontSize: 25),
-                    ),
-                    Text(
-                      "asdfghjklkjhgfdsasdfghjkmnxcvbnmnbvsdfghjkjhgfdsrtyuhgfddfghjkjhgfdsfghjsdfghnbcvbngndgdgbsdfhbvfdhvjbafduhvbadskhjkbvhsvhdvdfvdbfvdfubvhbv",
-                      style: TextStyle(color: Colors.grey, fontSize: 15),
-                    ),
-                    Row(
+                    Column(
+                      //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("4.4"),
-                        Text("100 cal"),
-                        Text("20min"),
+                        SizedBox(height: 150),
+                        Container(
+                          height: 35,
+                          width: 110,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(14)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(0xff6cd551),
+                                blurRadius: 10,
+                              ),
+                            ],
+                            color: Colors.green,
+                          ),
+                          child: Row(
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    Global.qty++;
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Text(
+                                "${Global.qty}",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    (Global.qty > 1)
+                                        ? Global.qty--
+                                        : Global.qty = 1;
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.remove,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 70),
+                        Container(
+                          padding: EdgeInsets.only(left: 20),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${data['title']}",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 25),
+                              ),
+                              Text(
+                                "${data['description']}",
+                                style:
+                                    TextStyle(color: Colors.grey, fontSize: 15),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 30),
+                        SizedBox(height: 30),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text("⭐️4.4"),
+                            Text("🔥100 cal"),
+                            Text("⏰20min"),
+                          ],
+                        ),
+                        SizedBox(height: 60),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              Global.cartProducts.add(data);
+                              Global.totalPrice += data['price'];
+                            });
+                          },
+                          child: Container(
+                            width: 360,
+                            height: 70,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(20),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color(0xff6cd551),
+                                  blurRadius: 10,
+                                ),
+                              ],
+                              color: Color(0xff6cd551),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Add To Cart",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
-                    Container(
-                      width: 200,
-                      height: 70,
-                      color: Colors.green,
-                    ),
                   ],
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment(0, -0.9),
+              child: CircleAvatar(
+                radius: 100,
+                backgroundColor: Colors.transparent,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: NetworkImage('${data['thumbnail']}'),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
                 ),
               ),
             ),
