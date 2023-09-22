@@ -22,7 +22,7 @@ class _infoPageState extends State<infoPage> {
           IconButton(
             onPressed: () {
               setState(() {
-                Navigator.of(context).pushNamed('four', arguments: data);
+                Navigator.of(context).pushNamed('four', arguments: data!);
               });
             },
             icon: const Icon(CupertinoIcons.suit_heart),
@@ -50,7 +50,7 @@ class _infoPageState extends State<infoPage> {
                     Column(
                       //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const SizedBox(height: 150),
+                        const SizedBox(height: 180),
                         Container(
                           height: 35,
                           width: 120,
@@ -132,7 +132,7 @@ class _infoPageState extends State<infoPage> {
                             Text("⏰20min"),
                           ],
                         ),
-                        const SizedBox(height: 60),
+                        const SizedBox(height: 20),
                         GestureDetector(
                           onTap: () {
                             setState(() {
@@ -187,6 +187,7 @@ class _infoPageState extends State<infoPage> {
                             ),
                           ),
                         ),
+                        const SizedBox(height: 60),
                       ],
                     ),
                   ],

@@ -57,13 +57,13 @@ class _HomeState extends State<Home> {
               ),
             ],
           ),
-          IconButton(
-            onPressed: () {
+          GestureDetector(
+            onTap: () {
               setState(() {
                 Navigator.of(context).pushNamed('four');
               });
             },
-            icon: const Icon(
+            child: const Icon(
               CupertinoIcons.suit_heart,
               color: Colors.green,
             ),
@@ -273,9 +273,10 @@ class _HomeState extends State<Home> {
                                                                                 false
                                                                             : e['fav'] =
                                                                                 true;
-                                                                        Global
-                                                                            .likeProducts
-                                                                            .add(e);
+                                                                        (e['fav'] ==
+                                                                                true)
+                                                                            ? Global.likeProducts.add(e)
+                                                                            : Global.likeProducts.remove(e);
                                                                       });
                                                                     },
                                                                     icon: (e['fav'] ==
@@ -306,7 +307,7 @@ class _HomeState extends State<Home> {
                                                                   style:
                                                                       const TextStyle(
                                                                     fontSize:
-                                                                        20,
+                                                                        16,
                                                                     color: Colors
                                                                         .black,
                                                                     fontWeight:

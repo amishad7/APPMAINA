@@ -12,8 +12,8 @@ class favPage extends StatefulWidget {
 class _favPageState extends State<favPage> {
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> data =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+    // Map<String, dynamic> data =
+    //     ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff6cd551),
@@ -52,7 +52,7 @@ class _favPageState extends State<favPage> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      ...Global.cartProducts.map((e) {
+                      ...Global.likeProducts.map((e) {
                         return GestureDetector(
                           onTap: () {
                             setState(
@@ -184,11 +184,8 @@ class _favPageState extends State<favPage> {
                                                 GestureDetector(
                                                   onTap: () {
                                                     setState(() {
-                                                      Global.cartProducts
+                                                      Global.likeProducts
                                                           .remove(e);
-
-                                                      Global.totalPrice -=
-                                                          e['price'];
                                                     });
                                                   },
                                                   child: const Icon(
